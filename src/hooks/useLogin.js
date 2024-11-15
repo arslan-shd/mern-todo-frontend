@@ -9,6 +9,10 @@ export const useLogin = () => {
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
+    console.log(
+      `${import.meta.env.VITE_API_URL}/api/v1/users/login`,
+      "console from useLogin"
+    );
 
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/users/login`,
