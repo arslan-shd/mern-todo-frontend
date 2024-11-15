@@ -32,9 +32,9 @@ const Home = () => {
   }, [dispatch, user]);
 
   return (
-    <main className={!todos && "main-empty"}>
+    <main className={todos?.length > 0 ? "" : "main-empty"}>
       <TodoForm />
-      {todos.length > 0 ? (
+      {todos?.length > 0 ? (
         <TodoList todos={todos} />
       ) : (
         <div className="relax-container">
@@ -45,6 +45,7 @@ const Home = () => {
           </p>
         </div>
       )}
+      {console.log(todos)}
     </main>
   );
 };
