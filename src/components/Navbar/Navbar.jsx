@@ -41,16 +41,27 @@ const Navbar = () => {
           }`}
         >
           {isOpen && (
-            <img
-              onClick={toggleMenu}
-              className="mobile-close-icon"
-              src={closeIcon}
-              alt=""
-            />
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}
+            >
+              <div>
+                <Link className="nav-logo-box " to="/">
+                  <img className="nav-logo" src={todoLogo} alt="logo" />
+                  <h1>TickIt</h1>
+                </Link>
+              </div>
+              <img
+                onClick={toggleMenu}
+                className="mobile-close-icon"
+                src={closeIcon}
+                alt=""
+              />
+            </div>
           )}
+
           {user && (
             <li>
-              <span className="user-email">arslan@yahoo.com</span>
+              <span className="user-email">{user?.data?.email}</span>
             </li>
           )}
           <li>
