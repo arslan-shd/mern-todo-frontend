@@ -30,8 +30,8 @@
     /* display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: start; */
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   main {
     display: grid;
