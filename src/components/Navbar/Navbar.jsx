@@ -25,7 +25,7 @@ const Navbar = () => {
       <div>
         <Link className="nav-logo-box" to="/">
           <img className="nav-logo" src={todoLogo} alt="logo" />
-          <h1>TickIt</h1>
+          <h1>Taskly</h1>
         </Link>
       </div>
       <nav>
@@ -47,7 +47,7 @@ const Navbar = () => {
               <div>
                 <Link className="nav-logo-box " to="/">
                   <img className="nav-logo" src={todoLogo} alt="logo" />
-                  <h1>TickIt</h1>
+                  <h1>Taskly</h1>
                 </Link>
               </div>
               <img
