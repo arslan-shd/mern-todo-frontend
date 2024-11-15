@@ -67,7 +67,7 @@ input::placeholder {
   font-weight: 600;
 }
 
-.todo-form .btn-add:disabled {
+.btn-add:disabled {
   background: gray;
 }
 
