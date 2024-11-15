@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <main className={!todos && "main-empty"}>
       <TodoForm />
-      {todos ? (
+      {todos.length > 0 ? (
         <TodoList todos={todos} />
       ) : (
         <div className="relax-container">
