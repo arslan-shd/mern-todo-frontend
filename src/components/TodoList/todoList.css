@@ -1,0 +1,25 @@
+.todo-list {
+  /* border: 2px solid blue; */
+  padding: 2rem 0;
+}
+
+.todo-list .title {
+  font-size: clamp(var(--fs-300), 8vw, var(--fs-800));
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-family: poppins, "sans-serif";
+  color: var(--clr-text-primary);
+}
+
+.todos {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .todo-list .title {
+    text-align: left;
+    text-decoration: underline;
+    text-underline-offset: 12px;
+  }
+}

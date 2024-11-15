@@ -1,0 +1,34 @@
+main {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.relax-container {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+}
+
+.relax-icon {
+  width: 60px;
+  height: 60px;
+  opacity: 0.8;
+}
+
+.relax-text {
+  color: #2e2e2e;
+  font-size: calc(var(--fs-700) * var(--text-multiplier));
+  font-weight: 900;
+  opacity: 0.5;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+  .main-empty {
+    align-items: center;
+  }
+}

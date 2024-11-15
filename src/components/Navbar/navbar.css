@@ -1,0 +1,126 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--clr-primary);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+.nav-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.nav-logo-box h1 {
+  font-size: calc(var(--fs-700) * var(--text-multiplier));
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+  flex-direction: column;
+}
+
+.nav-links .user-email {
+  margin-right: 0.25rem;
+  color: #ced4da;
+}
+
+.nav-links .logout-btn {
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  font-size: calc(var(--fs-400) * var(--text-multiplier));
+}
+
+.nav-links li:hover .nav-link {
+  padding: 0.45rem 1rem;
+  background: #fff;
+  color: var(--clr-primary);
+  border-radius: 25px;
+}
+
+.nav-link:focus {
+  padding: 0.45rem 1rem;
+  background: #fff;
+  color: var(--clr-primary);
+  border-radius: 25px;
+}
+
+.mobile-menu-icon-btn {
+  background: none;
+}
+
+.mobile-menu-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.mobile-close-icon {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+  margin-bottom: 2rem;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Start off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: var(--clr-primary);
+  padding: 30px 20px;
+  transition: right 0.3s ease; /* Slide-in transition */
+  z-index: 10;
+}
+.menu-open {
+  right: 0; /* Move into view */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.hidden-on-mobile {
+  display: none;
+}
+@media (min-width: 768px) {
+  .nav-container {
+    padding: 0.5rem 3rem;
+  }
+  .nav-links {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .hidden-on-desktop {
+    display: none;
+  }
+  .hidden-on-mobile {
+    display: flex;
+  }
+}

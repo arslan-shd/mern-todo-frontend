@@ -1,0 +1,14 @@
+.error-container {
+  color: #d3011c;
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-icon {
+  width: 30px;
+  height: 30px;
+}
