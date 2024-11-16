@@ -64,16 +64,21 @@ const Navbar = () => {
               <span className="user-email">{user?.data?.email}</span>
             </li>
           )}
-          <li>
-            <Link to="/login" className="nav-link">
-              Log In
-            </Link>
-          </li>
-          <li>
-            <Link to="/signup" className="nav-link">
-              Sign Up
-            </Link>
-          </li>
+
+          {!user && (
+            <>
+              <li>
+                <Link to="/login" className="nav-link">
+                  Log In
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </>
+          )}
           {user && (
             <li>
               <button onClick={handleClick} className="nav-link logout-btn">
