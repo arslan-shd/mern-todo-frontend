@@ -128,10 +128,7 @@ const Todo = ({ todo }) => {
       </div>
       <div className="todo-actions">
         {todo.status === "completed" ? (
-          <button
-            onClick={() => handleMarkComplete(todo)}
-            className="check-btn"
-          >
+          <button onClick={() => handleMarkComplete(todo)} className="undo-btn">
             <i className="fas fa-undo"></i>
           </button>
         ) : (

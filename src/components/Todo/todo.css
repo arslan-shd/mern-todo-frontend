@@ -142,13 +142,14 @@
 }
 
 /* Check Button */
-.check-btn {
+.check-btn,
+.undo-btn {
   background: rgba(0, 111, 64, 0.3); /* Lighter green */
 }
 
-.check-btn:hover {
+.check-btn:hover,
+.undo-btn:hover {
   background: #3ab360; /* Darker green */
-  transform: scale(1.1);
 }
 
 /* Delete Button */
@@ -164,7 +165,6 @@
 
 .delete-btn:hover {
   background: #e0434f; /* Darker red on hover */
-  transform: scale(1.1);
 }
 
 /* Update Button */
@@ -174,7 +174,6 @@
 
 .update-btn:hover {
   background: #3ab360; /* Darker green */
-  transform: scale(1.1);
 }
 
 .delete-btn i {
@@ -182,13 +181,15 @@
 }
 
 .update-btn i,
-.check-btn i {
+.check-btn i,
+.undo-btn i {
   color: rgb(0, 111, 64); /* Lighter green */
 }
 
 .delete-btn:hover i,
 .update-btn:hover i,
-.check-btn:hover i {
+.check-btn:hover i,
+.undo-btn:hover i {
   color: #fff;
 }
 
@@ -200,5 +201,12 @@ button i {
 @media (min-width: 768px) {
   .todo-card button {
     border-radius: 10px;
+  }
+
+  .check-btn:hover,
+  .undo-btn:hover,
+  .update-btn:hover,
+  .delete-btn:hover {
+    transform: scale(1.1);
   }
 }
