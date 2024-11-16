@@ -35,7 +35,10 @@ const Home = () => {
     <main className={todos?.length > 0 ? "" : "main-empty"}>
       <TodoForm />
       {todos?.length > 0 ? (
-        <TodoList todos={todos} />
+        <div>
+          <h2 className="title">Your Todos</h2>
+          <TodoList todos={todos} />
+        </div>
       ) : (
         <div className="relax-container">
           <img className="relax-icon" src={relaxIcon} alt="" />
@@ -45,7 +48,7 @@ const Home = () => {
           </p>
         </div>
       )}
-      {console.log(todos)}
+      {/* {console.log(todos)} */}
     </main>
   );
 };

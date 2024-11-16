@@ -11,7 +11,7 @@
   --clr-danger: 211, 47, 47;
   --clr-error: #d3011c;
 
-  --text-multiplier: 0.95;
+  --text-multiplier: 0.8;
   /* h1 */
   --fs-900: 2.986rem;
   /* h2 */
@@ -67,4 +67,47 @@ button {
 
 a {
   text-decoration: none;
+}
+
+/* Media queries */
+/* xs */
+@media (min-width: 475px) {
+  :root {
+    --text-multiplier: 0.85;
+  }
+}
+
+/* sm */
+@media (min-width: 640px) {
+  :root {
+    --text-multiplier: 0.9;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  :root {
+    --text-multiplier: 0.9;
+  }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  :root {
+    --text-multiplier: 0.9;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  :root {
+    --text-multiplier: 1;
+  }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  :root {
+    --text-multiplier: 1.25;
+  }
 }

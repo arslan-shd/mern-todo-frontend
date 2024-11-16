@@ -1,10 +1,47 @@
-.todo {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0.5rem;
+.todo-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* max-width: 400px; */
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  color: #fff;
+  background: rgb(0, 111, 64);
+  background: -moz-linear-gradient(
+    270deg,
+    rgba(0, 111, 64, 1) 0%,
+    rgba(68, 228, 149, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    270deg,
+    rgba(0, 111, 64, 1) 0%,
+    rgba(68, 228, 149, 1) 100%
+  );
+  background: linear-gradient(
+    270deg,
+    rgba(0, 111, 64, 1) 0%,
+    rgba(68, 228, 149, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006f40",endColorstr="#44e495",GradientType=1);
+  box-shadow: rgba(68, 228, 149, 0.35) 0px 5px 15px;
 }
 
-.todo-name {
+.todo-card.completed {
+  background: #d3d3d3; /* Gray background for completed tasks */
+  color: #6c757d; /* Muted text color */
+}
+
+.completed .todo-title,
+.completed .todo-description {
+  text-decoration: line-through;
+}
+
+.todo-card .card-content {
+  flex: 1;
+}
+
+.todo-title {
   font-size: calc(var(--fs-500) * var(--text-multiplier));
   margin-bottom: 0.125rem;
 }
@@ -22,7 +59,7 @@
   margin-bottom: 0.25rem;
 }
 
-.todo-priority {
+.priority-tag {
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   text-transform: capitalize;
@@ -39,24 +76,21 @@
 .priority-high {
   background-color: rgb(var(--clr-danger));
 }
-.todo-due-date {
-  border: 2px solid var(--clr-text-primary);
+.due-date-tag {
+  border: 2px solid #fff;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
 }
 
 .todo-created-at {
-  color: var(--clr-text-primary);
   font-size: calc(var(--fs-200) * var(--text-multiplier));
   text-transform: capitalize;
 }
 
 .todo-actions {
   display: flex;
-  /* flex-wrap: wrap; */
-  gap: 0.5rem;
-  /* flex-shrink: 0; */
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .btn-actions {
@@ -76,4 +110,61 @@
 .btn-update {
   border: 2px solid rgb(var(--clr-success));
   background-color: rgba(var(--clr-success), 0.2);
+}
+
+.todo-card button {
+  padding: 5px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Check Button */
+.check-btn {
+  background: #34c759; /* Green */
+}
+
+.check-btn:hover {
+  background: #28a745; /* Darker green on hover */
+  transform: scale(1.1);
+}
+
+/* Delete Button */
+.delete-btn {
+  background: #ff4b5c; /* Red */
+}
+
+.delete-btn:hover {
+  background: #e0434f; /* Darker red on hover */
+  transform: scale(1.1);
+}
+
+/* Update Button */
+.update-btn {
+  background: #45c36f; /* Lighter green */
+}
+
+.update-btn:hover {
+  background: #3ab360; /* Darker green */
+  transform: scale(1.1);
+}
+
+/* Icons Styling */
+button i {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .todo-card {
+    padding: 0.5rem 2rem;
+  }
+  .todo-card button {
+    border-radius: 10px;
+  }
 }

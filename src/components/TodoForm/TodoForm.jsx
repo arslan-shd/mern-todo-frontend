@@ -66,17 +66,19 @@ const TodoForm = () => {
               placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
+              maxLength={40}
               required
             />
           </div>
           <div className="field">
             <label htmlFor="description">Description</label>
-            <input
+            <textarea
               id="description"
               type="text"
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
               value={description}
+              maxLength={60}
             />
           </div>
           <div className="field">

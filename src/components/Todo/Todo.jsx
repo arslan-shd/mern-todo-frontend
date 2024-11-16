@@ -1,7 +1,8 @@
 import { useTodosContext } from "../../hooks/useTodosContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import "./todo.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import highPriorityFlag from "../../assets/flag-high.svg";
+import "./todo.css";
 
 const Todo = ({ todo }) => {
   const { dispatch } = useTodosContext();
@@ -26,14 +27,45 @@ const Todo = ({ todo }) => {
     }
   };
 
+  const handleMarkComplete = async (todo) => {
+    console.log("complete button clicked");
+    if (!user) {
+      return;
+    }
+
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/v1/todos/${todo._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          status: todo.status === "completed" ? "pending" : "completed",
+        }),
+      }
+    );
+
+    const json = await response.json();
+
+    console.log(json);
+
+    if (response.ok) {
+      dispatch({ type: "UPDATE_TODO", payload: json.data.todo });
+    }
+  };
+
   return (
-    <div className="todo">
-      <div className="details">
-        <h3 className="todo-name">{todo.title}</h3>
+    <div
+      className={`todo-card ${todo.status === "completed" ? "completed" : ""}`}
+    >
+      <div className="card-content">
+        <h3 className="todo-title">{todo.title}</h3>
         <p className="todo-description">{todo.description}</p>
         <div className="todo-tags">
           <div
-            className={`todo-priority ${
+            className={`priority-tag ${
               todo.priority === "high"
                 ? "priority-high"
                 : todo.priority === "medium"
@@ -43,7 +75,15 @@ const Todo = ({ todo }) => {
           >
             {todo.priority}
           </div>
-          <div className="todo-due-date">
+          {/* <div className={"priority-tag"}>
+            {todo.priority === "high" && (
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src={highPriorityFlag}
+              />
+            )}
+          </div> */}
+          <div className="due-date-tag">
             {new Date(todo.dueDate).toLocaleString("en-GB", {
               day: "numeric",
               month: "short",
@@ -56,13 +96,27 @@ const Todo = ({ todo }) => {
         </p>
       </div>
       <div className="todo-actions">
-        <button
-          className="btn-actions btn-delete"
-          onClick={() => handleDelete(todo)}
-        >
-          Delete
+        {todo.status === "completed" ? (
+          <button
+            onClick={() => handleMarkComplete(todo)}
+            className="check-btn"
+          >
+            <i className="fas fa-undo"></i>
+          </button>
+        ) : (
+          <button
+            onClick={() => handleMarkComplete(todo)}
+            className="check-btn"
+          >
+            <i className="fas fa-check"></i>
+          </button>
+        )}
+        <button onClick={() => handleDelete(todo)} className="delete-btn">
+          <i className="fas fa-trash-alt"></i>
         </button>
-        <button className="btn-actions btn-update">Update</button>
+        <button className="update-btn">
+          <i className="fas fa-pen"></i>
+        </button>
       </div>
     </div>
   );
