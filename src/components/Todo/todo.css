@@ -143,17 +143,23 @@
 
 /* Check Button */
 .check-btn {
-  background: #34c759; /* Green */
+  background: rgba(0, 111, 64, 0.3); /* Lighter green */
 }
 
 .check-btn:hover {
-  background: #28a745; /* Darker green on hover */
+  background: #3ab360; /* Darker green */
   transform: scale(1.1);
 }
 
 /* Delete Button */
 .delete-btn {
-  background: #ff4b5c; /* Red */
+  background: rgba(var(--clr-danger), 0.3); /* Red */
+}
+
+.update-btn i,
+.delete-btn i {
+  font-size: 0.8em;
+  padding: 2px;
 }
 
 .delete-btn:hover {
@@ -163,12 +169,27 @@
 
 /* Update Button */
 .update-btn {
-  background: #45c36f; /* Lighter green */
+  background: rgba(0, 111, 64, 0.3); /* Lighter green */
 }
 
 .update-btn:hover {
   background: #3ab360; /* Darker green */
   transform: scale(1.1);
+}
+
+.delete-btn i {
+  color: rgb(var(--clr-danger)); /* Red */
+}
+
+.update-btn i,
+.check-btn i {
+  color: rgb(0, 111, 64); /* Lighter green */
+}
+
+.delete-btn:hover i,
+.update-btn:hover i,
+.check-btn:hover i {
+  color: #fff;
 }
 
 /* Icons Styling */
