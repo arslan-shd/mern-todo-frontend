@@ -4,8 +4,7 @@ import TodoList from "../components/TodoList/TodoList";
 import { useTodosContext } from "../hooks/useTodosContext";
 import relaxIcon from "../assets/relax-icon.svg";
 import { useAuthContext } from "../hooks/useAuthContext";
-// import loader from "../assets/loader.gif";
-import loaderPlant from "../assets/loader-plant.gif";
+import loader from "../assets/loader.gif";
 import "./home.css";
 
 const Home = () => {
@@ -55,7 +54,7 @@ const Home = () => {
         </div>
       ) : (
         <div className="relax-container">
-          <img src={loaderPlant} className="loader" alt="" />
+          <img src={loader} className="loader" alt="" />
         </div>
       )}
 
