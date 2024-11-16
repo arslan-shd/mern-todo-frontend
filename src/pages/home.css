@@ -34,6 +34,7 @@ main .title {
 .relax-container .loader {
   width: 100px;
   height: 100px;
+  max-width: 100%;
 }
 
 @media (min-width: 768px) {
