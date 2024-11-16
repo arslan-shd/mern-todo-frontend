@@ -5,9 +5,9 @@
   /* max-width: 400px; */
   width: 100%;
   padding: 0.5rem 1rem;
-  border-radius: 15px;
-  color: #fff;
-  background: rgb(0, 111, 64);
+  border-radius: 12px;
+  color: var(--clr-text-primary);
+  /* background: rgb(0, 111, 64);
   background: -moz-linear-gradient(
     270deg,
     rgba(0, 111, 64, 1) 0%,
@@ -23,8 +23,9 @@
     rgba(0, 111, 64, 1) 0%,
     rgba(68, 228, 149, 1) 100%
   );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006f40",endColorstr="#44e495",GradientType=1);
-  box-shadow: rgba(68, 228, 149, 0.35) 0px 5px 15px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006f40",endColorstr="#44e495",GradientType=1); */
+  border-left: 10px solid var(--clr-primary);
+  box-shadow: rgba(0, 111, 64, 0.3) 0px 1px 2px 1px;
 }
 
 .todo-card.completed {
@@ -48,7 +49,13 @@
 
 .todo-description {
   font-size: calc(var(--fs-300) * var(--text-multiplier));
-  margin-bottom: 0.25rem;
+}
+
+.card-content .divider {
+  width: 95%;
+  height: 0.5px;
+  background-color: #adb5bd;
+  margin: 0.45rem 0;
 }
 
 .todo-tags {
@@ -77,9 +84,10 @@
   background-color: rgb(var(--clr-danger));
 }
 .due-date-tag {
-  border: 2px solid #fff;
+  border: 2px solid var(--clr-primary);
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
+  font-size: calc(var(--fs-200) * var(--text-multiplier));
 }
 
 .todo-created-at {
@@ -161,9 +169,6 @@ button i {
 }
 
 @media (min-width: 768px) {
-  .todo-card {
-    padding: 0.5rem 2rem;
-  }
   .todo-card button {
     border-radius: 10px;
   }

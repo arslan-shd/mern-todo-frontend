@@ -2,6 +2,8 @@ import { useTodosContext } from "../../hooks/useTodosContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import highPriorityFlag from "../../assets/flag-high.svg";
+import mediumPriorityFlag from "../../assets/flag-medium.svg";
+import lowPriorityFlag from "../../assets/flag-low.svg";
 import "./todo.css";
 
 const Todo = ({ todo }) => {
@@ -63,8 +65,9 @@ const Todo = ({ todo }) => {
       <div className="card-content">
         <h3 className="todo-title">{todo.title}</h3>
         <p className="todo-description">{todo.description}</p>
+        <div className="divider"></div>
         <div className="todo-tags">
-          <div
+          {/* <div
             className={`priority-tag ${
               todo.priority === "high"
                 ? "priority-high"
@@ -74,21 +77,34 @@ const Todo = ({ todo }) => {
             }`}
           >
             {todo.priority}
-          </div>
-          {/* <div className={"priority-tag"}>
-            {todo.priority === "high" && (
-              <img
-                style={{ width: "30px", height: "30px" }}
-                src={highPriorityFlag}
-              />
-            )}
           </div> */}
+
           <div className="due-date-tag">
             {new Date(todo.dueDate).toLocaleString("en-GB", {
               day: "numeric",
               month: "short",
               year: "numeric",
             })}
+          </div>
+          <div className={"priority-tag"}>
+            {todo.priority === "high" && (
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src={highPriorityFlag}
+              />
+            )}
+            {todo.priority === "medium" && (
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src={mediumPriorityFlag}
+              />
+            )}
+            {todo.priority === "low" && (
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src={lowPriorityFlag}
+              />
+            )}
           </div>
         </div>
         <p className="todo-created-at">
