@@ -25,12 +25,13 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006f40",endColorstr="#44e495",GradientType=1); */
   border-left: 10px solid var(--clr-primary);
-  box-shadow: rgba(0, 111, 64, 0.3) 0px 1px 2px 1px;
+  box-shadow: rgba(0, 111, 64, 0.3) 0px 1px 2px 3px;
 }
 
 .todo-card.completed {
   background: #d3d3d3; /* Gray background for completed tasks */
   color: #6c757d; /* Muted text color */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 3px;
 }
 
 .completed .todo-title,
