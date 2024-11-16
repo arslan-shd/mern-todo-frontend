@@ -107,12 +107,6 @@ const Todo = ({ todo }) => {
                 src={mediumPriorityFlag}
               />
             )}
-            {todo.priority === "low" && (
-              <img
-                style={{ width: "30px", height: "30px" }}
-                src={lowPriorityFlag}
-              />
-            )}
           </div>
         </div>
         <p className="todo-created-at">
