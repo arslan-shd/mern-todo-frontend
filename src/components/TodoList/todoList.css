@@ -2,6 +2,7 @@
   max-height: 400px;
   overflow-y: auto;
   padding: 0 0.75rem;
+  padding-bottom: 0.5rem;
 }
 
 .todo-list::-webkit-scrollbar {
