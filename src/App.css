@@ -15,18 +15,12 @@
   .container {
     max-width: 475px;
   }
-  :root {
-    --text-multiplier: 3;
-  }
 }
 
 /* sm */
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
-  }
-  :root {
-    --text-multiplier: 0.95;
   }
 }
 
@@ -36,11 +30,6 @@
     max-width: 768px;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
-  }
-  main {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    align-items: start;
   }
 }
 

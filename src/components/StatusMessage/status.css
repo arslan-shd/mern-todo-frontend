@@ -1,0 +1,9 @@
+.status-container .status {
+  font-size: calc(var(--fs-100) * var(--text-multiplier));
+  color: var(--clr-primary);
+  margin-top: 4px;
+}
+
+.status-container .text-red {
+  color: red;
+}

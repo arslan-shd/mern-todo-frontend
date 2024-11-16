@@ -6,7 +6,7 @@ main {
 main .title {
   font-size: clamp(var(--fs-300), 8vw, var(--fs-800));
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
   font-family: poppins, "sans-serif";
   color: var(--clr-text-primary);
 }
@@ -39,8 +39,9 @@ main .title {
 
 @media (min-width: 768px) {
   main {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     align-items: start;
+    gap: 2rem;
   }
   .main-empty {
     align-items: center;
@@ -50,5 +51,6 @@ main .title {
     text-align: left;
     text-decoration: underline;
     text-underline-offset: 12px;
+    margin-bottom: 1.5;
   }
 }

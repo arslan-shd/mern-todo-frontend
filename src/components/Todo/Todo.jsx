@@ -4,9 +4,13 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import highPriorityFlag from "../../assets/flag-high.svg";
 import mediumPriorityFlag from "../../assets/flag-medium.svg";
 import lowPriorityFlag from "../../assets/flag-low.svg";
+import StatusMessage from "../StatusMessage/StatusMessage";
 import "./todo.css";
+import { useState } from "react";
 
 const Todo = ({ todo }) => {
+  const [isMarkingComplete, setIsMarkingComplete] = useState(false);
+  const [isDeletingTodo, setIsDeletingTodo] = useState(false);
   const { dispatch } = useTodosContext();
   const { user } = useAuthContext();
 
@@ -14,6 +18,7 @@ const Todo = ({ todo }) => {
     if (!user) {
       return;
     }
+    setIsDeletingTodo(true);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/todos/${todo._id}`,
       {
@@ -25,6 +30,7 @@ const Todo = ({ todo }) => {
       }
     );
     if (response.ok) {
+      setIsDeletingTodo(false);
       dispatch({ type: "DELETE_TODO", payload: todo });
     }
   };
@@ -35,6 +41,7 @@ const Todo = ({ todo }) => {
       return;
     }
 
+    setIsMarkingComplete(true);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/todos/${todo._id}`,
       {
@@ -54,6 +61,7 @@ const Todo = ({ todo }) => {
     console.log(json);
 
     if (response.ok) {
+      setIsMarkingComplete(false);
       dispatch({ type: "UPDATE_TODO", payload: json.data.todo });
     }
   };
@@ -110,6 +118,19 @@ const Todo = ({ todo }) => {
         <p className="todo-created-at">
           {formatDistanceToNow(new Date(todo.createdAt), { addSuffix: true })}
         </p>
+        {isMarkingComplete && (
+          <StatusMessage
+            status={
+              todo.status === "completed"
+                ? "Unmarking todo as completed..."
+                : "Marking todo as completed..."
+            }
+            textColor={todo.status === "completed" && "text-red"}
+          />
+        )}
+        {isDeletingTodo && (
+          <StatusMessage status="Deleting todo..." textColor="text-red" />
+        )}
       </div>
       <div className="todo-actions">
         {todo.status === "completed" ? (
