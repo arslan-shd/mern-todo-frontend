@@ -15,13 +15,13 @@ const Todo = ({ todo }) => {
   const { dispatch } = useTodosContext();
   const { user } = useAuthContext();
 
-  const convertUtcToLocal = () => {
-    const utcDate = new Date(todo.reminder);
-    return utcDate.toLocaleString(); // Converts the UTC time to the local time zone
-  };
+  // const convertUtcToLocal = () => {
+  //   const utcDate = new Date(todo.reminder);
+  //   return utcDate.toLocaleString(); // Converts the UTC time to the local time zone
+  // };
 
   const [task, setTask] = useState(todo.title);
-  const [reminderTime, setReminderTime] = useState(convertUtcToLocal()); // Example reminder time (local)
+  const [reminderTime, setReminderTime] = useState(todo.reminder); // Example reminder time (local)
 
   // Check if notification permission is granted when the component mounts
   useEffect(() => {
