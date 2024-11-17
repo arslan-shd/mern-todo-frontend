@@ -12,8 +12,8 @@
   padding: 2.25rem 1rem;
 }
 
-.title {
-  font-size: clamp(var(--fs-300), 10vw, var(--fs-700));
+.form-title {
+  font-size: clamp(var(--fs-300), 9vw, var(--fs-700));
   text-align: center;
   margin-bottom: 0.5rem;
   font-family: poppins, "sans-serif";
@@ -56,7 +56,7 @@ input::placeholder {
   color: gray;
 }
 
-.btn-add {
+.submit-btn {
   display: block;
   padding: 1rem 2.5rem;
   margin: 0 auto;
@@ -69,7 +69,7 @@ input::placeholder {
   font-weight: 600;
 }
 
-.btn-add:disabled {
+.submit-btn:disabled {
   background: gray;
 }
 
@@ -77,7 +77,7 @@ input::placeholder {
 @media (min-width: 768px) {
   .todo-form {
     order: 2;
-    position: sticky;
-    top: 5rem;
+    /* position: sticky;
+    top: 5rem; */
   }
 }

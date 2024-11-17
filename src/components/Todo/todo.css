@@ -118,17 +118,7 @@
   font-weight: (--fw-extrabold);
 }
 
-.btn-delete {
-  border: 2px solid rgb(var(--clr-danger));
-  background-color: rgba(var(--clr-danger), 0.2);
-}
-
-.btn-update {
-  border: 2px solid rgb(var(--clr-success));
-  background-color: rgba(var(--clr-success), 0.2);
-}
-
-.todo-card button {
+.icon-btn {
   padding: 5px;
   border: none;
   border-radius: 8px;
@@ -149,7 +139,7 @@
 
 .check-btn:hover,
 .undo-btn:hover {
-  background: #3ab360; /* Darker green */
+  background: var(--clr-primary); 
 }
 
 /* Delete Button */
@@ -164,26 +154,28 @@
 }
 
 .delete-btn:hover {
-  background: #e0434f; /* Darker red on hover */
+  /* background: #e0434f; */
+  background: rgb(var(--clr-danger));
 }
 
 /* Update Button */
 .update-btn {
-  background: rgba(0, 111, 64, 0.3); /* Lighter green */
+  background: rgba(0, 111, 64, 0.3); 
 }
 
 .update-btn:hover {
-  background: #3ab360; /* Darker green */
+  /* background: #3ab360;  */
+  background: var(--clr-primary);
 }
 
 .delete-btn i {
-  color: rgb(var(--clr-danger)); /* Red */
+  color: rgb(var(--clr-danger));
 }
 
 .update-btn i,
 .check-btn i,
 .undo-btn i {
-  color: rgb(0, 111, 64); /* Lighter green */
+  color: rgb(0, 111, 64); /
 }
 
 .delete-btn:hover i,
@@ -194,7 +186,7 @@
 }
 
 /* Icons Styling */
-button i {
+.icon-btn i {
   margin: 0;
 }
 

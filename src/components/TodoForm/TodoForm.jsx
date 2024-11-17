@@ -56,7 +56,7 @@ const TodoForm = () => {
   return (
     <div className="todo-form">
       <form onSubmit={handleSubmit}>
-        <h2 className="title">Create A Todo</h2>
+        <h2 className="form-title">Create A Todo</h2>
         <fieldset>
           <div className="field">
             <label htmlFor="title">Title</label>
@@ -107,7 +107,7 @@ const TodoForm = () => {
             />
           </div>
         </fieldset>
-        <button disabled={isLoading} className="btn-add">
+        <button disabled={isLoading} className="submit-btn">
           Add Todo
         </button>
         {error && <ErrorMessage error={error} />}

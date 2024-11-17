@@ -1,16 +1,17 @@
+import { useState } from "react";
 import { useTodosContext } from "../../hooks/useTodosContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import highPriorityFlag from "../../assets/flag-high.svg";
 import mediumPriorityFlag from "../../assets/flag-medium.svg";
-import lowPriorityFlag from "../../assets/flag-low.svg";
 import StatusMessage from "../StatusMessage/StatusMessage";
+import Modal from "../Modal/Modal";
 import "./todo.css";
-import { useState } from "react";
 
 const Todo = ({ todo }) => {
   const [isMarkingComplete, setIsMarkingComplete] = useState(false);
   const [isDeletingTodo, setIsDeletingTodo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { dispatch } = useTodosContext();
   const { user } = useAuthContext();
 
@@ -62,14 +63,19 @@ const Todo = ({ todo }) => {
 
     if (response.ok) {
       setIsMarkingComplete(false);
-      dispatch({ type: "UPDATE_TODO", payload: json.data.todo });
+      dispatch({ type: "CHANGE_TODO_STATUS", payload: json.data.todo });
     }
+  };
+
+  const handleUpdate = () => {
+    setShowModal(true);
   };
 
   return (
     <div
       className={`todo-card ${todo.status === "completed" ? "completed" : ""}`}
     >
+      {showModal && <Modal setShowModal={setShowModal} todo={todo} />}
       <div className="card-content">
         <h3 className="todo-title">{todo.title}</h3>
         <p className="todo-description">{todo.description}</p>
@@ -128,21 +134,27 @@ const Todo = ({ todo }) => {
       </div>
       <div className="todo-actions">
         {todo.status === "completed" ? (
-          <button onClick={() => handleMarkComplete(todo)} className="undo-btn">
+          <button
+            onClick={() => handleMarkComplete(todo)}
+            className="icon-btn undo-btn"
+          >
             <i className="fas fa-undo"></i>
           </button>
         ) : (
           <button
             onClick={() => handleMarkComplete(todo)}
-            className="check-btn"
+            className="icon-btn check-btn"
           >
             <i className="fas fa-check"></i>
           </button>
         )}
-        <button onClick={() => handleDelete(todo)} className="delete-btn">
+        <button
+          onClick={() => handleDelete(todo)}
+          className="icon-btn delete-btn"
+        >
           <i className="fas fa-trash-alt"></i>
         </button>
-        <button className="update-btn">
+        <button className="icon-btn update-btn" onClick={handleUpdate}>
           <i className="fas fa-pen"></i>
         </button>
       </div>
