@@ -1,8 +1,14 @@
 import { useState } from "react";
-import "./todoForm.css";
 import { useTodosContext } from "../../hooks/useTodosContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+// import DateTimePicker from "react-datetime-picker";
+// import "react-datetime-picker/dist/DateTimePicker.css";
+// import "react-calendar/dist/Calendar.css";
+// import "react-clock/dist/Clock.css";
+// import { parse } from "date-fns";
+// import { format, utcToZonedTime } from "date-fns-tz";
+import "./todoForm.css";
 
 const TodoForm = () => {
   const { dispatch } = useTodosContext();
@@ -12,6 +18,7 @@ const TodoForm = () => {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("low");
   const [dueDate, setDueDate] = useState("");
+  const [reminder, setReminder] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +31,13 @@ const TodoForm = () => {
 
     setIsLoading(true);
 
-    const todo = { title, description, priority, dueDate };
+    const todo = {
+      title,
+      description,
+      priority,
+      dueDate,
+      reminder,
+    };
 
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/todos`,
@@ -47,6 +60,7 @@ const TodoForm = () => {
       setDescription("");
       setPriority("");
       setDueDate("");
+      setReminder("");
       setError(null);
       setIsLoading(false);
       dispatch({ type: "CREATE_TODO", payload: json.data.todos });
@@ -106,12 +120,22 @@ const TodoForm = () => {
               required
             />
           </div>
+          <div className="field">
+            <label htmlFor="reminder">Add a reminder</label>
+            <input
+              type="datetime-local"
+              value={reminder}
+              onChange={(e) => setReminder(e.target.value)}
+              name="reminder"
+            />
+          </div>
         </fieldset>
         <button disabled={isLoading} className="submit-btn">
           Add Todo
         </button>
         {error && <ErrorMessage error={error} />}
       </form>
+      {/* Reminder set to:  2024-11-18T21:30 */}
     </div>
   );
 };

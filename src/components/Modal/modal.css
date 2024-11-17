@@ -16,10 +16,13 @@
 
 .modal .close-btn {
   font-size: 2rem;
+}
+
+.modal .close-btn i {
   color: var(--clr-text-primary);
 }
 
-.modal .close-btn:hover {
+.modal .close-btn:hover i {
   color: rgb(var(--clr-danger));
 }
 

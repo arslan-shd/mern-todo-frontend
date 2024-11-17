@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTodosContext } from "../../hooks/useTodosContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -14,6 +14,50 @@ const Todo = ({ todo }) => {
   const [showModal, setShowModal] = useState(false);
   const { dispatch } = useTodosContext();
   const { user } = useAuthContext();
+
+  const convertUtcToLocal = () => {
+    const utcDate = new Date(todo.reminder);
+    return utcDate.toLocaleString(); // Converts the UTC time to the local time zone
+  };
+
+  const [task, setTask] = useState(todo.title);
+  const [reminderTime, setReminderTime] = useState(convertUtcToLocal()); // Example reminder time (local)
+
+  // Check if notification permission is granted when the component mounts
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      // Request permission if not already granted
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted");
+        }
+      });
+    }
+  }, []);
+
+  // Function to show a notification
+  const triggerNotification = () => {
+    if (Notification.permission === "granted") {
+      new Notification("Reminder", { body: `Task "${task}" is due!` });
+    }
+  };
+
+  // Example: Trigger a notification when the reminder time arrives
+  useEffect(() => {
+    const reminderDateTime = new Date(reminderTime);
+    const currentTime = new Date();
+
+    // If the reminder time is in the future, set a timeout to show the notification
+    if (reminderDateTime > currentTime) {
+      const timeout = reminderDateTime - currentTime;
+      const reminderTimeout = setTimeout(() => {
+        triggerNotification();
+      }, timeout);
+
+      // Cleanup the timeout if the component is unmounted
+      return () => clearTimeout(reminderTimeout);
+    }
+  }, [reminderTime]);
 
   const handleDelete = async (todo) => {
     if (!user) {
@@ -100,6 +144,7 @@ const Todo = ({ todo }) => {
               year: "numeric",
             })}
           </div>
+          {todo?.reminder}
           <div className={"priority-tag"}>
             {todo.priority === "high" && (
               <img
