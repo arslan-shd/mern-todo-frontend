@@ -21,8 +21,7 @@ const App = () => {
           // Subscribe to push notifications
           const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey:
-              "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI",
+            applicationServerKey: import.meta.env.SUBSCRIPTION_PUBLIC_KEY,
           });
 
           // Send the subscription to the backend only if it's new
