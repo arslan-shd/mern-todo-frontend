@@ -164,6 +164,11 @@ const Todo = ({ todo }) => {
               />
             )}
           </div>
+          {todo.reminder && (
+            <div className="reminder-tag">
+              <i className="fa-solid fa-stopwatch"></i>
+            </div>
+          )}
         </div>
         <p className="todo-created-at">
           Created{" "}

@@ -94,6 +94,12 @@
   font-size: calc(var(--fs-200) * var(--text-multiplier));
 }
 
+.reminder-tag i{
+  color: rgb(var(--clr-danger));
+  font-size: calc(var(--fs-500) * var(--text-multiplier));
+
+}
+
 .completed .due-date-tag {
   border: 2px solid #6c757d;
 }

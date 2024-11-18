@@ -36,7 +36,7 @@ const TodoForm = () => {
       description,
       priority,
       dueDate,
-      reminder: new Date(reminder).toISOString(),
+      reminder: reminder ? new Date(reminder).toISOString() : "",
     };
 
     const response = await fetch(
