@@ -47,11 +47,13 @@ const Todo = ({ todo }) => {
     const reminderDateTime = new Date(reminderTime);
     console.log("reminderDateTime: " + reminderDateTime);
     console.log("reminderTime: " + reminderTime);
-    console.log("currentTime: " + currentTime);
     const currentTime = new Date();
+
+    console.log("currentTime: " + currentTime);
 
     // If the reminder time is in the future, set a timeout to show the notification
     if (reminderDateTime > currentTime) {
+      console.log("I ran inside if block in remindeer Date time");
       const timeout = reminderDateTime - currentTime;
       const reminderTimeout = setTimeout(() => {
         triggerNotification();
