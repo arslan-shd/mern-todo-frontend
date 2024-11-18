@@ -2,6 +2,6 @@ self.addEventListener("push", (event) => {
   const data = event.data.json();
   self.registration.showNotification(data.title, {
     body: data.body,
-    icon: "/icon.png", // Add an appropriate icon
+    // icon: "/icon.png", // Add an appropriate icon
   });
 });
