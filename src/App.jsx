@@ -11,45 +11,50 @@ import "./App.css";
 
 const App = () => {
   const { user } = useAuthContext();
+
   useEffect(() => {
     async function subscribeUser() {
       try {
         if ("serviceWorker" in navigator && "PushManager" in window) {
-          // Register the service worker
           const registration = await navigator.serviceWorker.register("/sw.js");
-          console.log("Service Worker registered successfully:", registration);
-
-          // Wait for service worker to be ready
-          const readyRegistration = await navigator.serviceWorker.ready;
-          console.log("Service Worker is ready:", readyRegistration);
 
           // Subscribe to push notifications
-          const subscription = await readyRegistration.pushManager.subscribe({
+          const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey:
-              "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI", // Your VAPID public key
+              "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI",
           });
-          console.log("Push subscription successful:", subscription);
 
-          // Send subscription to your backend
-          await fetch(`${import.meta.env.VITE_API_URL}/api/v1/subscribe`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(subscription),
-          });
-        } else {
-          console.error(
-            "Service Worker or PushManager is not supported in this browser."
+          // Send the subscription to the backend only if it's new
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/api/v1/subscribe/check`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ endpoint: subscription.endpoint }),
+            }
           );
+
+          const { exists } = await response.json();
+
+          if (!exists) {
+            // Save the new subscription to the backend
+            await fetch(`${import.meta.env.VITE_API_URL}/api/v1/subscribe`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(subscription),
+            });
+          }
         }
       } catch (error) {
-        console.error("Error during subscription:", error);
+        console.error("Error subscribing user:", error);
       }
     }
 
-    // Call this function on app load or user login
     subscribeUser();
   }, []);
 
