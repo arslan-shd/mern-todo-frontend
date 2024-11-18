@@ -12,24 +12,40 @@ import "./App.css";
 const App = () => {
   const { user } = useAuthContext();
   useEffect(() => {
-    // Subscribe the user for push notifications
     async function subscribeUser() {
-      if ("serviceWorker" in navigator && "PushManager" in window) {
-        const registration = await navigator.serviceWorker.register("/sw.js");
-        const subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey:
-            "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI", // Use your VAPID public key
-        });
+      try {
+        if ("serviceWorker" in navigator && "PushManager" in window) {
+          // Register the service worker
+          const registration = await navigator.serviceWorker.register("/sw.js");
+          console.log("Service Worker registered successfully:", registration);
 
-        // Send subscription to your backend
-        await fetch(`${import.meta.env.VITE_API_URL}/api/v1/subscribe`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(subscription),
-        });
+          // Wait for service worker to be ready
+          const readyRegistration = await navigator.serviceWorker.ready;
+          console.log("Service Worker is ready:", readyRegistration);
+
+          // Subscribe to push notifications
+          const subscription = await readyRegistration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey:
+              "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI", // Your VAPID public key
+          });
+          console.log("Push subscription successful:", subscription);
+
+          // Send subscription to your backend
+          await fetch(`${import.meta.env.VITE_API_URL}/api/v1/subscribe`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(subscription),
+          });
+        } else {
+          console.error(
+            "Service Worker or PushManager is not supported in this browser."
+          );
+        }
+      } catch (error) {
+        console.error("Error during subscription:", error);
       }
     }
 
