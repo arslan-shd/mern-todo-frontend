@@ -29,8 +29,6 @@ const TodoForm = () => {
       return;
     }
 
-    // converting to UTC
-
     setIsLoading(true);
 
     const todo = {
@@ -53,6 +51,7 @@ const TodoForm = () => {
       }
     );
     const json = await response.json();
+
     if (!response.ok) {
       setError(response.error);
     }
