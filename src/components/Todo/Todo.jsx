@@ -45,6 +45,9 @@ const Todo = ({ todo }) => {
   // Example: Trigger a notification when the reminder time arrives
   useEffect(() => {
     const reminderDateTime = new Date(reminderTime);
+    console.log("reminderDateTime: " + reminderDateTime);
+    console.log("reminderTime: " + reminderTime);
+    console.log("currentTime: " + currentTime);
     const currentTime = new Date();
 
     // If the reminder time is in the future, set a timeout to show the notification
