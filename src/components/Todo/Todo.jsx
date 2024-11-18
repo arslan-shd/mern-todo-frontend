@@ -149,7 +149,7 @@ const Todo = ({ todo }) => {
               year: "numeric",
             })}
           </div>
-          {todo?.reminder}
+          {/* {todo?.reminder} */}
           <div className={"priority-tag"}>
             {todo.priority === "high" && (
               <img
@@ -166,6 +166,7 @@ const Todo = ({ todo }) => {
           </div>
         </div>
         <p className="todo-created-at">
+          Created{" "}
           {formatDistanceToNow(new Date(todo.createdAt), { addSuffix: true })}
         </p>
         {isMarkingComplete && (
