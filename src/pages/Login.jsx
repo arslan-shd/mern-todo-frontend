@@ -8,35 +8,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { login, isLoading, error } = useLogin();
 
-  // Subscribe the user for push notifications
-  async function subscribeUser() {
-    if ("serviceWorker" in navigator && "PushManager" in window) {
-      const registration = await navigator.serviceWorker.register("/sw.js");
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey:
-          "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI", // Use your VAPID public key
-      });
-
-      // Send subscription to your backend
-      await fetch(`${import.meta.env.VITE_API_URL}/api/v1/subscribe`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(subscription),
-      });
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await login(email, password);
     setEmail("");
     setPassword("");
-    // Call this function on app load or user login
-    subscribeUser();
   };
 
   return (
