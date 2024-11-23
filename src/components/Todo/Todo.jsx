@@ -43,26 +43,26 @@ const Todo = ({ todo }) => {
   };
 
   // Example: Trigger a notification when the reminder time arrives
-  useEffect(() => {
-    const reminderDateTime = new Date(reminderTime);
-    // console.log("reminderDateTime: " + reminderDateTime);
-    // console.log("reminderTime: " + reminderTime);
-    const currentTime = new Date();
+  // useEffect(() => {
+  //   const reminderDateTime = new Date(reminderTime);
+  //   // console.log("reminderDateTime: " + reminderDateTime);
+  //   // console.log("reminderTime: " + reminderTime);
+  //   const currentTime = new Date();
 
-    // console.log("currentTime: " + currentTime);
+  //   // console.log("currentTime: " + currentTime);
 
-    // If the reminder time is in the future, set a timeout to show the notification
-    if (reminderDateTime > currentTime) {
-      console.log("I ran inside if block in remindeer Date time");
-      const timeout = reminderDateTime - currentTime;
-      const reminderTimeout = setTimeout(() => {
-        triggerNotification();
-      }, timeout);
+  //   // If the reminder time is in the future, set a timeout to show the notification
+  //   if (reminderDateTime > currentTime) {
+  //     console.log("I ran inside if block in remindeer Date time");
+  //     const timeout = reminderDateTime - currentTime;
+  //     const reminderTimeout = setTimeout(() => {
+  //       triggerNotification();
+  //     }, timeout);
 
-      // Cleanup the timeout if the component is unmounted
-      return () => clearTimeout(reminderTimeout);
-    }
-  }, [reminderTime]);
+  //     // Cleanup the timeout if the component is unmounted
+  //     return () => clearTimeout(reminderTimeout);
+  //   }
+  // }, [reminderTime]);
 
   const handleDelete = async (todo) => {
     if (!user) {
@@ -152,16 +152,10 @@ const Todo = ({ todo }) => {
           {/* {todo?.reminder} */}
           <div className={"priority-tag"}>
             {todo.priority === "high" && (
-              <img
-                style={{ width: "30px", height: "30px" }}
-                src={highPriorityFlag}
-              />
+              <img className="priority-flag-img" src={highPriorityFlag} />
             )}
             {todo.priority === "medium" && (
-              <img
-                style={{ width: "30px", height: "30px" }}
-                src={mediumPriorityFlag}
-              />
+              <img className="priority-flag-img" src={mediumPriorityFlag} />
             )}
           </div>
           {todo.reminder && (

@@ -22,6 +22,33 @@ const TodoForm = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const subscribeUser = async () => {
+    console.error("Subscibe user was called");
+    try {
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        const registration = await navigator.serviceWorker.register("/sw.js");
+        console.log("ServiceWorker registration successfully", registration);
+
+        // Check if the user is already subscribed
+        const subscription = await registration.pushManager.getSubscription();
+        if (subscription) {
+          // User is already subscribed, return the existing subscription
+          return subscription;
+        }
+
+        // Subscribe to push notifications
+        const newSubscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: import.meta.env.VITE_SUBSCRIPTION_PUBLIC_KEY,
+        });
+        console.log(newSubscription, "User registered");
+        return newSubscription;
+      }
+    } catch (error) {
+      console.error("Error subscribing user:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -31,40 +58,50 @@ const TodoForm = () => {
 
     setIsLoading(true);
 
-    const todo = {
-      title,
-      description,
-      priority,
-      dueDate,
-      reminder: reminder ? new Date(reminder).toISOString() : "",
-    };
+    try {
+      const subscription = await subscribeUser();
+      console.log(subscription, "i am subscription");
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/v1/todos`,
-      {
-        method: "POST",
-        body: JSON.stringify(todo),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
+      const todo = {
+        title,
+        description,
+        priority,
+        dueDate,
+        reminder: reminder ? new Date(reminder).toISOString() : "",
+        subscription,
+      };
+
+      console.log(todo, " I am todo with subscription");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/todos`,
+        {
+          method: "POST",
+          body: JSON.stringify(todo),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(response.error);
       }
-    );
-    const json = await response.json();
 
-    if (!response.ok) {
-      setError(response.error);
-    }
-
-    if (response.ok) {
-      setTitle("");
-      setDescription("");
-      setPriority("");
-      setDueDate("");
-      setReminder("");
-      setError(null);
-      setIsLoading(false);
-      dispatch({ type: "CREATE_TODO", payload: json.data.todos });
+      if (response.ok) {
+        setTitle("");
+        setDescription("");
+        setPriority("");
+        setDueDate("");
+        setReminder("");
+        setError(null);
+        setIsLoading(false);
+        dispatch({ type: "CREATE_TODO", payload: json.data.todos });
+        console.log("Everything was ok");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

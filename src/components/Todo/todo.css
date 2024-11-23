@@ -76,6 +76,11 @@
   text-transform: capitalize;
 }
 
+.priority-flag-img{
+  width: 21px;
+ height: 21px; 
+}
+
 .priority-low {
   border: 2px solid var(--clr-text-primary);
 }
@@ -207,4 +212,10 @@
   .delete-btn:hover {
     transform: scale(1.1);
   }
+
+  
+.priority-flag-img{
+  width: 30px;
+ height: 30px; 
+}
 }
