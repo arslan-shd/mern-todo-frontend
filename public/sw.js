@@ -11,5 +11,5 @@ self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
   // Handle notification click (e.g., open a specific page)
-  event.waitUntil(clients.openWindow("/"));
+  event.waitUntil(clients.openWindow("https://tickit-todo.netlify.app/"));
 });
