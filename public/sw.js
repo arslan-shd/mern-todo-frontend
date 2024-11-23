@@ -6,10 +6,33 @@ self.addEventListener("push", (event) => {
   });
 });
 
+// self.addEventListener("notificationclick", (event) => {
+//   // Close the notification when clicked
+//   event.notification.close();
+
+//   // Handle notification click (e.g., open a specific page)
+//   event.waitUntil(clients.openWindow("https://tickit-todo.netlify.app/"));
+// });
+
 self.addEventListener("notificationclick", (event) => {
-  // Close the notification when clicked
+  console.log("On notification click: ", event.notification.tag);
   event.notification.close();
 
-  // Handle notification click (e.g., open a specific page)
-  event.waitUntil(clients.openWindow("https://tickit-todo.netlify.app/"));
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: "window",
+      })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === "/" && "focus" in client) {
+            client.focus();
+            break;
+          }
+        }
+        if (clients.openWindow) return clients.openWindow("/");
+      })
+  );
 });
