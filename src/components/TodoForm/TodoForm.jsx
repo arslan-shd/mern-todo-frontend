@@ -2,12 +2,6 @@ import { useState } from "react";
 import { useTodosContext } from "../../hooks/useTodosContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-// import DateTimePicker from "react-datetime-picker";
-// import "react-datetime-picker/dist/DateTimePicker.css";
-// import "react-calendar/dist/Calendar.css";
-// import "react-clock/dist/Clock.css";
-// import { parse } from "date-fns";
-// import { format, utcToZonedTime } from "date-fns-tz";
 import "./todoForm.css";
 
 const TodoForm = () => {
@@ -27,7 +21,7 @@ const TodoForm = () => {
     try {
       if ("serviceWorker" in navigator && "PushManager" in window) {
         const registration = await navigator.serviceWorker.register("/sw.js");
-        console.log("ServiceWorker registration successfully", registration);
+        // console.log("ServiceWorker registration successfully", registration);
 
         // Check if the user is already subscribed
         const subscription = await registration.pushManager.getSubscription();
@@ -41,7 +35,7 @@ const TodoForm = () => {
           userVisibleOnly: true,
           applicationServerKey: import.meta.env.VITE_SUBSCRIPTION_PUBLIC_KEY,
         });
-        console.log(newSubscription, "User registered");
+        // console.log(newSubscription, "User registered");
         return newSubscription;
       }
     } catch (error) {
@@ -60,7 +54,7 @@ const TodoForm = () => {
 
     try {
       const subscription = await subscribeUser();
-      console.log(subscription, "i am subscription");
+      // console.log(subscription, "i am subscription");
 
       const todo = {
         title,
@@ -71,7 +65,7 @@ const TodoForm = () => {
         subscription,
       };
 
-      console.log(todo, " I am todo with subscription");
+      // console.log(todo, " I am todo with subscription");
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/v1/todos`,
         {
@@ -98,7 +92,7 @@ const TodoForm = () => {
         setError(null);
         setIsLoading(false);
         dispatch({ type: "CREATE_TODO", payload: json.data.todos });
-        console.log("Everything was ok");
+        // console.log("Everything was ok");
       }
     } catch (err) {
       console.error(err);

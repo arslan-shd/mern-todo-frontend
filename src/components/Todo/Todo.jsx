@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTodosContext } from "../../hooks/useTodosContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -14,21 +14,6 @@ const Todo = ({ todo }) => {
   const [showModal, setShowModal] = useState(false);
   const { dispatch } = useTodosContext();
   const { user } = useAuthContext();
-
-  // const [task, setTask] = useState(todo.title);
-  // const [reminderTime, setReminderTime] = useState(todo.reminder); // Example reminder time (local)
-
-  // Check if notification permission is granted when the component mounts
-  // useEffect(() => {
-  //   if (Notification.permission !== "granted") {
-  //     // Request permission if not already granted
-  //     Notification.requestPermission().then((permission) => {
-  //       if (permission === "granted") {
-  //         console.log("Notification permission granted");
-  //       }
-  //     });
-  //   }
-  // }, []);
 
   const handleDelete = async (todo) => {
     if (!user) {
@@ -74,7 +59,7 @@ const Todo = ({ todo }) => {
 
     const json = await response.json();
 
-    console.log(json);
+    // console.log(json);
 
     if (response.ok) {
       setIsMarkingComplete(false);

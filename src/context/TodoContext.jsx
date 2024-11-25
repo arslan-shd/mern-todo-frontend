@@ -4,7 +4,7 @@ export const TodosContext = createContext();
 
 export const TodosContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(todosReducer, { todos: null });
-  console.log("TodosContext: ", state);
+  // console.log("TodosContext: ", state);
 
   return (
     <TodosContext.Provider value={{ ...state, dispatch }}>
@@ -36,7 +36,6 @@ export const todosReducer = (state, action) => {
       return {
         todos: state.todos.map((todo) => {
           if (todo._id === action.payload._id) {
-            console.log("Match found:", todo); // Debugging
             return {
               ...todo,
               ...action.payload,
@@ -50,7 +49,6 @@ export const todosReducer = (state, action) => {
       return {
         todos: state.todos.map((todo) => {
           if (todo._id === action.payload._id) {
-            console.log("Match found:", todo); // Debugging
             return {
               ...todo,
               status: todo.status === "completed" ? "pending" : "completed",

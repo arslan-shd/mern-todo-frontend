@@ -26,7 +26,7 @@ const Modal = ({ setShowModal, todo }) => {
       return;
     }
 
-    console.log("printing form update todo in modal", todo);
+    // console.log("printing form update todo in modal", todo);
     setIsLoading(true);
 
     const response = await fetch(
