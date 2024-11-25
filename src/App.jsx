@@ -3,10 +3,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-
 import Navbar from "./components/Navbar/Navbar";
-
-// import { useEffect } from "react";
 import "./App.css";
 
 const App = () => {

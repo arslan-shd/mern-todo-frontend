@@ -17,7 +17,7 @@ const TodoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const subscribeUser = async () => {
-    console.error("Subscibe user was called");
+    // console.error("Subscibe user was called");
     try {
       if ("serviceWorker" in navigator && "PushManager" in window) {
         const registration = await navigator.serviceWorker.register("/sw.js");

@@ -47,15 +47,25 @@ export const todosReducer = (state, action) => {
 
     case "CHANGE_TODO_STATUS":
       return {
-        todos: state.todos.map((todo) => {
-          if (todo._id === action.payload._id) {
-            return {
-              ...todo,
-              status: todo.status === "completed" ? "pending" : "completed",
-            };
-          }
-          return todo;
-        }),
+        todos: state.todos
+          .map((todo) => {
+            if (todo._id === action.payload._id) {
+              return {
+                ...todo,
+                status: todo.status === "completed" ? "pending" : "completed",
+              };
+            }
+            return todo;
+          })
+          .sort((a, b) => {
+            if (a.status === "pending" && b.status === "completed") {
+              return -1; // "pending" comes before "completed"
+            }
+            if (a.status === "completed" && b.status === "pending") {
+              return 1; // "completed" comes after "pending"
+            }
+            return 0; // No change if both statuses are the same
+          }),
       };
 
     default: {
