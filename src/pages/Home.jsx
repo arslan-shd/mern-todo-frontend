@@ -6,11 +6,12 @@ import relaxIcon from "../assets/relax-icon.svg";
 import { useAuthContext } from "../hooks/useAuthContext";
 import loader from "../assets/loader.gif";
 import "./home.css";
+import Filters from "../components/Filters/Filters";
 
 const Home = () => {
   const [areTodosLoading, setAreTodosLoading] = useState(false);
 
-  const { todos, dispatch } = useTodosContext();
+  const { todos, filteredTodos, dispatch } = useTodosContext();
   const { user } = useAuthContext();
   useEffect(() => {
     const fetchTodos = async () => {
@@ -42,7 +43,8 @@ const Home = () => {
       {todos?.length > 0 && !areTodosLoading ? (
         <div>
           <h2 className="title">Your Todos</h2>
-          <TodoList todos={todos} />
+          <Filters />
+          <TodoList todos={todos} filteredTodos={filteredTodos} />
         </div>
       ) : !todos?.length > 0 && !areTodosLoading ? (
         <div className="relax-container">

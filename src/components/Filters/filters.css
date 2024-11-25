@@ -1,0 +1,25 @@
+.filters-container {
+  /* border: 2px solid yellowgreen; */
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.filter {
+  background: var(--clr-primary);
+  color: #fff;
+  padding: 0.65rem 0.25rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .filters-container {
+    justify-content: start;
+
+    margin-bottom: 1rem;
+  }
+}
