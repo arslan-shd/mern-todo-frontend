@@ -92,6 +92,7 @@ const TodoForm = () => {
         setError(null);
         setIsLoading(false);
         dispatch({ type: "CREATE_TODO", payload: json.data.todos });
+        dispatch({ type: "APPLY_FILTERS" }); // Apply filters after updating status
         // console.log("Everything was ok");
       }
     } catch (err) {

@@ -33,6 +33,7 @@ const Todo = ({ todo }) => {
     if (response.ok) {
       setIsDeletingTodo(false);
       dispatch({ type: "DELETE_TODO", payload: todo });
+      dispatch({ type: "APPLY_FILTERS" }); // Apply filters after updating status
     }
   };
 
@@ -64,6 +65,7 @@ const Todo = ({ todo }) => {
     if (response.ok) {
       setIsMarkingComplete(false);
       dispatch({ type: "CHANGE_TODO_STATUS", payload: json.data.todo });
+      dispatch({ type: "APPLY_FILTERS" }); // Apply filters after updating status
     }
   };
 
