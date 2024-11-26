@@ -45,6 +45,7 @@ const Modal = ({ setShowModal, todo }) => {
     if (response.ok) {
       setIsLoading(false);
       dispatch({ type: "UPDATE_TODO", payload: json.data.todo });
+      dispatch({ type: "APPLY_FILTERS" }); // Apply filters after updating status
       setShowModal(false);
     }
   };
